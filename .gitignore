@@ -1,0 +1,7 @@
+*.swp
+*.retry
+*.DS_STORE
+.idea
+*.iml
+
+.vagrant

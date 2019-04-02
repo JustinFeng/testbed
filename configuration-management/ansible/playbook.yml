@@ -1,0 +1,18 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: Install setup requirements
+      apt: pkg={{ item }}
+      with_items:
+        - gnupg2
+        - ca-certificates
+      become: yes
+
+    - name: Update apt cache
+      apt: update_cache=yes
+      become: yes
+
+  roles:
+    - docker
+    - docker-compose

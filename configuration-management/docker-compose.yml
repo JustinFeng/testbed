@@ -1,0 +1,31 @@
+version: "2.1"
+services:
+  worker:
+    ports:
+      - "8081:80"
+    image: nginx:alpine
+    volumes:
+      - "../configuration-management/nginx-worker.conf:/etc/nginx/nginx.conf:ro"
+    networks:
+      integration:
+        ipv4_address: 10.2.1.4
+
+  forwarder:
+    ports:
+      - "8082:80"
+    image: nginx:alpine
+    stdin_open: true
+    tty: true
+    volumes:
+      - "../configuration-management/nginx-forwarder.conf:/etc/nginx/nginx.conf:ro"
+    networks:
+      integration:
+        ipv4_address: 10.2.1.5
+
+networks:
+  integration:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.2.1.0/16
+          gateway: 10.2.1.1
