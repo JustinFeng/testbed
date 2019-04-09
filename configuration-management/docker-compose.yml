@@ -14,8 +14,6 @@ services:
     ports:
       - "8082:80"
     image: nginx:alpine
-    stdin_open: true
-    tty: true
     volumes:
       - "../configuration-management/nginx-forwarder.conf:/etc/nginx/nginx.conf:ro"
     networks:
